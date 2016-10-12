@@ -1,0 +1,27 @@
+OATH for OpenBSD
+Developed in Jan - Feb, 2014 by Dennis Lindroos <denafcm@gmail.com>
+
+
+RECENT:
+* OTP window; hard-coded because i don't know how to get login(1) to pass me
+              proper -v optiona
+* HOTP is now build-time default, but when called as login_totp will go TOTP
+* strsep replaces strtok, as recommended
+
+TODO:
+* Challenge mode ?
+
+Keys-file format:
+
+* Field separator can be '|', ':', space or tab
+* First is the PIN-code (see PIN_LENGTH define)
+* Second is the 160-bit SHA1 message digest in hexadecimal
+* Third is the current counter, a 64-bit integer in hex
+
+john	1900|314bbcb3b76a892609fd|0000000000000010
+
+
+NOTE! OpenBSD 5.8 makemap(1) produces db files where keys INCLUDE the
+null-terminating '\0'. To you these db files, compile this program with
+-DNULL_TERMINATED.
+
